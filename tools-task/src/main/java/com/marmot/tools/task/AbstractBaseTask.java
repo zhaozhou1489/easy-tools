@@ -1,5 +1,7 @@
 package com.marmot.tools.task;
 
+import com.marmot.tools.task.lock_service.AbstractScheduleLockService;
+import com.marmot.tools.task.lock_service.LockService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,7 +22,11 @@ public abstract class AbstractBaseTask {
      **/
 
     @Autowired
-    protected ScheduleNodeLockService nodeLockService;
+    protected LockService lockService;
+
+    public void setNodeLockService(LockService lockService) {
+        this.lockService = lockService;
+    }
 
     private volatile long startTs = 0;
 
@@ -30,7 +36,7 @@ public abstract class AbstractBaseTask {
         String taskName = this.getClass().getName();
         try {
             log.debug("##processTask:{}",taskName );
-            if (nodeLockService.locked()) {
+            if (lockService.locked()) {
                 this.doBeforeTask();
                 this.doTask();
                 this.doAfterTask();
