@@ -1,7 +1,6 @@
 package com.marmot.tools.task;
 
-import com.marmot.tools.task.lock_service.AbstractScheduleLockService;
-import com.marmot.tools.task.lock_service.LockService;
+import com.marmot.tools.task.service.lock.LockService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 

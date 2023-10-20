@@ -1,17 +1,12 @@
-package com.marmot.tools.task.lock_service;
+package com.marmot.tools.task.service.lock;
 
 import com.marmot.tools.task.utils.IpUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.api.RBucket;
-import org.redisson.api.RedissonClient;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 import org.springframework.util.Assert;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.params.SetParams;
 
-import java.time.Duration;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 

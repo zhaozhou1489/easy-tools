@@ -1,4 +1,4 @@
-package com.marmot.tools.task.lock_service;
+package com.marmot.tools.task.service.lock;
 
 public interface LockService {
 
