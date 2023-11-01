@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.marmot.tools</groupId>
     <artifactId>tools-db-query</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>tools-db-query</name>
     <description>tools-db-query</description>
     <properties>
