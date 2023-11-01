@@ -32,7 +32,7 @@ public class QueryTransUtil {
      * @Param
      * @return
      **/
-    public static String transQueryParam(QueryParam queryParam, QueryCond queryCond, Set<String> validFields) {
+    public static String transQueryParam(QueryParam queryParam, QueryCond queryCond, Set<String> validFields, Set<String> requiredFields) {
         String errMsg = "";
         List<AbstractBaseQuery> queries = new LinkedList<>();
 
@@ -64,7 +64,7 @@ public class QueryTransUtil {
         queryCond.setOrders(queryParam.getOrders());
 
         //校验字段是否支持
-        errMsg = validFieldOfQueryCond(queryCond, validFields);
+        errMsg = validFieldOfQueryCond(queryCond, validFields,requiredFields);
         if (StringUtils.isNotBlank(errMsg)){
             log.error("verify field fail, msg={}", errMsg);
             return errMsg;
@@ -79,19 +79,41 @@ public class QueryTransUtil {
     /**
      * @Desc 检测查询参数是否合法
      **/
-    private static String validFieldOfQueryCond(QueryCond queryCond, Set<String> validFields){
+    private static String validFieldOfQueryCond(QueryCond queryCond, Set<String> validFields, Set<String> requiredFields){
         if (CollectionUtils.isEmpty(validFields)){
             return "";
         }
         //查询字段检查
         Set<String> queryInvalidFields = CollectionUtils.isEmpty(queryCond.getQueries()) ? new HashSet<>() :
                 validQueryField(queryCond.getQueries(), validFields);
+        Set<String> requiredFieldResult = validRequiredField(queryCond.getQueries(), new HashSet<>(requiredFields));
+        if (CollectionUtils.isNotEmpty(requiredFieldResult)){
+            return "Fields " + JSON.toJSONString(requiredFieldResult) + "are required";
+        }
         //排序字段检查
         Set<String> orderInvalidFields = CollectionUtils.isEmpty(queryCond.getOrders()) ? new HashSet<>():
                 queryCond.getOrders().stream().map(Order::getField).filter(field -> !validFields.contains(field)).collect(Collectors.toSet());
 
         Set<String> invalidFields = Stream.of(queryInvalidFields,orderInvalidFields).flatMap(Set::stream).collect(Collectors.toSet());
         return CollectionUtils.isEmpty(invalidFields) ? "": "fields " + JSONUtil.toJsonStr(invalidFields) + " are not support";
+    }
+
+
+    /**
+     * @Desc 检测查询字段是否合法
+     **/
+    private static Set<String> validRequiredField(List<? extends AbstractBaseQuery> queries, Set<String> requiredFields){
+        for (AbstractBaseQuery query:queries){
+            if (query instanceof AbstractFieldQuery){
+                if (!requiredFields.contains(((AbstractFieldQuery) query).getField())){
+                    requiredFields.remove(((AbstractFieldQuery) query).getField());
+                }
+            }
+            if (query instanceof BooleanQuery){
+                validQueryField(((BooleanQuery) query).getQueries(), requiredFields);
+            }
+        }
+        return requiredFields;
     }
 
 
@@ -116,6 +138,8 @@ public class QueryTransUtil {
         return invalidFields;
     }
 
+
+
     public static void main(String[] args){
         QueryParam queryParam = QueryBuilder.newBuilder()
                 .addEqualQuery("test","121212")
@@ -132,7 +156,7 @@ public class QueryTransUtil {
         String queryStr = JSONUtil.toJsonStr(queryParam);
         QueryParam qp = JSON.parseObject(queryStr,QueryParam.class);
         QueryCond cond = new QueryCond();
-        transQueryParam(qp,cond,new HashSet<>(Arrays.asList("test","name","createTime")));
+        transQueryParam(qp,cond,new HashSet<>(Arrays.asList("test","name","createTime")),new HashSet<>(Arrays.asList("test","name","createTime")));
         System.out.println(JSON.toJSON(cond));
 
     }

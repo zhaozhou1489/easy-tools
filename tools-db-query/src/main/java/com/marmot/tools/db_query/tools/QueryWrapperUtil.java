@@ -210,7 +210,7 @@ public class QueryWrapperUtil {
         System.out.println(JSONUtil.toJsonStr(queryParam));
 
         QueryCond cond = new QueryCond();
-        String errMsg = QueryTransUtil.transQueryParam(queryParam,cond, Stream.of("test", "name","createTime","id").collect(Collectors.toSet()));
+        String errMsg = QueryTransUtil.transQueryParam(queryParam,cond, Stream.of("test", "name","createTime","id").collect(Collectors.toSet()),Stream.of("test", "name","createTime","ddd").collect(Collectors.toSet()));
         System.out.println("trans errMsg=" + errMsg);
 
         QueryWrapper wrapper = new QueryWrapper();
