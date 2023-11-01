@@ -1,4 +1,4 @@
-package com.marmot.tools.task;
+package test;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -19,8 +19,6 @@ import java.util.concurrent.TimeUnit;
  * @Date: 2023/08/15
  * @Desc: 定时任务配置
  */
-@EnableAsync
-@Configuration
 @Slf4j
 public class ScheduledConfig implements SchedulingConfigurer {
 
