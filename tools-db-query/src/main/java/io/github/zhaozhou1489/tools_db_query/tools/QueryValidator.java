@@ -2,8 +2,6 @@ package io.github.zhaozhou1489.tools_db_query.tools;
 
 import cn.hutool.json.JSONUtil;
 import io.github.zhaozhou1489.tools_db_query.enums.QueryOperatorEnum;
-import com.marmot.tools.db_query.query.*;
-import io.github.zhaozhou1489.query.*;
 import io.github.zhaozhou1489.tools_db_query.query.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;

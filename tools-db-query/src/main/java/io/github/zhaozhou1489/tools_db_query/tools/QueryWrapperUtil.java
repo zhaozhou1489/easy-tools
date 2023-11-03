@@ -8,8 +8,6 @@ import io.github.zhaozhou1489.tools_db_query.enums.QueryOperatorEnum;
 import io.github.zhaozhou1489.tools_db_query.enums.QueryOrderEnum;
 import io.github.zhaozhou1489.tools_db_query.params.QueryCond;
 import io.github.zhaozhou1489.tools_db_query.params.QueryParam;
-import com.marmot.tools.db_query.query.*;
-import io.github.zhaozhou1489.query.*;
 import io.github.zhaozhou1489.tools_db_query.query.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
