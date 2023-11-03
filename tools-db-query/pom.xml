@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.zhaozhou1489</groupId>
     <artifactId>tools-db-query</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <name>tools-db-query</name>
     <url>https://github.com/zhaozhou1489/easy-tools/tree/master/tools-db-query</url>
     <description>tools-db-query</description>
