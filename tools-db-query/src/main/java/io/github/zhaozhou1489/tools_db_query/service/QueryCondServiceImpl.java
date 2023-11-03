@@ -17,10 +17,11 @@ import java.util.List;
  */
 public class QueryCondServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M,T> {
 
+
     /**
      * @Desc 查找一个
      **/
-    public T findOne(QueryCond cond) {
+    public T selectOne(QueryCond cond) {
         QueryWrapper<T> wrapper = new QueryWrapper<>();
         QueryWrapperUtil.transQueryCond(wrapper, cond);
         List<T> datas = baseMapper.selectList(wrapper);
@@ -30,7 +31,7 @@ public class QueryCondServiceImpl<M extends BaseMapper<T>, T> extends ServiceImp
     /**
      * @Desc 查找列表
      **/
-    public List<T> findList(QueryCond cond) {
+    public List<T> selectList(QueryCond cond) {
         QueryWrapper<T> wrapper = new QueryWrapper<>();
         QueryWrapperUtil.transQueryCond(wrapper, cond);
         return baseMapper.selectList(wrapper);
@@ -39,7 +40,7 @@ public class QueryCondServiceImpl<M extends BaseMapper<T>, T> extends ServiceImp
     /**
      * @Desc 分页查找
      **/
-    public Page findPage(QueryCond cond, int pageNo, int pageSize) {
+    public Page selectPage(QueryCond cond, int pageNo, int pageSize) {
         QueryWrapper<T> wrapper = new QueryWrapper<>();
         QueryWrapperUtil.transQueryCond(wrapper, cond);
         return baseMapper.selectPage(new Page<>(pageNo, pageSize), wrapper);
