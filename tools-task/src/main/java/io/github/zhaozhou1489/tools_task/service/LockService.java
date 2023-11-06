@@ -1,4 +1,4 @@
-package io.github.zhaozhou1489.tools_task.service.lock;
+package io.github.zhaozhou1489.tools_task.service;
 
 public interface LockService {
 

@@ -21,5 +21,5 @@ public class TaskLock {
 
     private Long expireAt;
 
-    private Long modifyStamp;
+    private Long modifyAt;
 }

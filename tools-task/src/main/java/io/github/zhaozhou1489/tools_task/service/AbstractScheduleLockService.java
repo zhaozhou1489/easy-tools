@@ -1,4 +1,4 @@
-package io.github.zhaozhou1489.tools_task.service.lock;
+package io.github.zhaozhou1489.tools_task.service;
 
 import io.github.zhaozhou1489.tools_task.utils.IpUtils;
 import lombok.extern.slf4j.Slf4j;
